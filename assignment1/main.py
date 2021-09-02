@@ -21,10 +21,7 @@ Total  number of nodes expanded
 The maximum number of nodes 'represented' in the search space
 The length of the Solution path
 A Sequence of the Solution path 
-"print(i)
-                if count%4 == 3:
-                        print("mod")
-                """
+"""
 
 import node
 
