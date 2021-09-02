@@ -26,9 +26,10 @@ import state
 
 
 class Node:
-    def __init__ (self, values, parent):
+    def __init__ (self, values, parent, level):
         self.state = state.State(values)
         self.parent = parent
+        self.level = level
         
         
         
