@@ -1,4 +1,4 @@
-import argparse
+
 
 
 """
@@ -21,21 +21,42 @@ Total  number of nodes expanded
 The maximum number of nodes 'represented' in the search space
 The length of the Solution path
 A Sequence of the Solution path 
+"print(i)
+                if count%4 == 3:
+                        print("mod")
+                """
 
-"""
+import node
 
+# slowly developing argument parser. 
 
-# place holder for initial argument parseer
+def find_repeat(numbers):
+    seen = set()
+    for num in numbers:
+        #print(num)
+        if num in seen:
+            raise ValueError('repeating values!')
+        seen.add(num)
 
 def main():
-                parser = argparse.ArgumentParser()  # creating object of a class
-                parser.add_argument("expr", help = 'Enter an 15-puzzle')
-                args = parser.parse_args()  # parsing the args
-                print(args.expr)  # printing the arguement
-                # rpnstack = rpn_stack.Rpn.Stack()
-                # use split method to split string
-                for token in args.expr.split():
-                        # rpnstack.rpn_push(token)
-                        print("\n is token " + token)
+        arr = input(" Enter digits [0-15], (seperated by commas), in any order as a START state for you 15-puzzle problem.\n") 
+        arr = arr.split(",")
+        if len(arr) < 16:
+                raise ValueError('too few digits!')
+        if len(arr) > 16:
+                raise ValueError('too many digits!')
+        find_repeat(arr)
+
+        for index, item in enumerate(arr):
+            #print(index, item)
+            temp = int(item)
+            if temp > 15 or temp < 0:
+                raise ValueError('invalid digit, must be 1-15')
+            arr[index] = temp
+            if index % 4 == 3:
+                print("mod")
+       
+
+        
 if __name__=='__main__':
         main()
