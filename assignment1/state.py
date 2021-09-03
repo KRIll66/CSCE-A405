@@ -57,7 +57,8 @@ class State:
                 multiplier += 1
              
         
-                #choose how far to reduce for the hashtable, 1000001 chosen arbitrarily
+             #if we don't want the full value of sum, choose modulo and 
+             #assign to hashVal
         return sum
                 
                 
@@ -120,6 +121,14 @@ class State:
         self.table[inty][intx] = 0
         self.table[blanky][blankx] = temp
    
+    
+   #a function to return the index of a target value, will be used for swap
+    def getIndex (self, val):
+        y = 0
+        for i in self.table:
+            if val in i:
+                return y, i.index(val)
+            y+=1
     
 
 
