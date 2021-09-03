@@ -12,6 +12,8 @@ Display:
 @author: marsh
 """
 import node
+import state
+import childstates
 
 
 def main():
@@ -34,15 +36,22 @@ def main():
     print ("The hashvalue for source is :", source.state.value)
     print ("The hashvalue for goal is :", goal.state.value)
     print ("the manhattan distance is:", mhd)
-
-    #test the swap function by swapping 6 with the blank space
-    source.state.swap(2,3,1,3)
-    #as we can see, 6 has changed places with the blank space
-    source.display()
     
     #gets index of desired value, returns  tuple
     indexOfBlank = source.state.getIndex(0)
     print ("index of blank space is: ", indexOfBlank)
+
+    testState = state.State(table2)
+    expandedState = childstates.ChildStates(testState)
+    expandedState.startingstate.display()
+    expandedState.moveUp()
+    expandedState.startingstate.display()
+    expandedState.moveRight()
+    expandedState.startingstate.display()
+    expandedState.moveLeft()
+    expandedState.startingstate.display()
+    expandedState.moveDown()
+    expandedState.startingstate.display()
 
     
 if __name__=='__main__':
