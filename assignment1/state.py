@@ -109,6 +109,16 @@ class State:
         #newlines at end of current state
         print ("")
         print ("")
+
+    #A simple swap function that "moves" the blank space by
+    #swapping it with a set of coordinates passed in.
+    #Takes in the coordinates in x,y, format, where x is the row and y is the column.
+    #First it takes in the coordinates for the blank space, then the
+    #coordinates for the space that the blank space is moving to.
+    def swap(self, blankx, blanky, intx, inty):
+        temp = self.table[inty][intx]
+        self.table[inty][intx] = 0
+        self.table[blanky][blankx] = temp
    
     
 

@@ -22,8 +22,8 @@ def main():
     table2 = [[2,5,3,4], [1,14,7,8], [9,10,11,12], [13,6,0,15]]
     
     
-    source = node.Node(table2, None)
-    goal = node.Node(table1, None)
+    source = node.Node(table2, None, 1)
+    goal = node.Node(table1, None, 1)
     print ("Goal:", end = "")
     goal.display()
     print ("Starting State:", end = "")
@@ -33,6 +33,11 @@ def main():
     print ("The hashvalue for source is :", source.state.value)
     print ("The hashvalue for goal is :", goal.state.value)
     print ("the manhattan distance is:", mhd)
+
+    #test the swap function by swapping 6 with the blank space
+    source.state.swap(2,3,1,3)
+    #as we can see, 6 has changed places with the blank space
+    source.display()
 
     
 if __name__=='__main__':
