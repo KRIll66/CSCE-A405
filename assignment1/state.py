@@ -25,8 +25,7 @@ value: unique hashvalue for this state table
 class State:
     def __init__ (self, table):
         self.table = table
-        self.value = self.hashval()
-      
+        self.value = self.hashval()      
  
     
  
