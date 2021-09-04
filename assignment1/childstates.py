@@ -100,7 +100,7 @@ class ChildStates:
             temp2 = self.moveRight()
             return temp1, temp2
 
-        if (row == 0 and col == 0):
+        if (row == 3 and col == 3):
             temp1 = self.moveUp()
             temp2 = self.moveLeft()
             return temp1, temp2

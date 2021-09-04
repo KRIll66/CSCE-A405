@@ -37,8 +37,8 @@ class BFS:
             children = childstates.ChildStates(self.currentNode.state)
             childrenStates = children.getChildStates()
             for child in childrenStates:
-                    if child.value not in self.list.openlist or child.value not in self.list.closedlist:
-                        if child.value == self.goalValue:
+                    if child.hashValue not in self.list.openlist or child.hashValue not in self.list.closedlist:
+                        if child.hashValue == self.goalValue:
                             return child
                         self.openlist.push_to_openL(child, 1)
         

@@ -28,7 +28,8 @@ def main():
     middle = node.Node(table2, source, 2)
     #creates a goal Node
     goal = node.Node(table3, middle, 3)
-
+    
+    """"
     #BFS class test
     print ("start of BFS test")
     thisBFS = BFS.BFS(table1, table2)
@@ -38,7 +39,7 @@ def main():
         solution.display()
     else: print ("no solution found")
     print ("end of BFS test")
-
+    """
 
     print ("start of nodeLists test")
     dual_list = nodelists.Nodelists()
@@ -55,11 +56,11 @@ def main():
     
     #gets manhattan distance from sourcestate to goal state
     mhd = source.state.manhattanDistance(goal)
-    print ("The hashvalue for source is :", source.state.value)
-    print ("The hashvalue for goal is :", goal.state.value)
+    print ("The hashvalue for source is :", source.state.hashValue)
+    print ("The hashvalue for goal is :", goal.state.hashValue)
     print ("the manhattan distance is:", mhd)
     
-    #gets index of desired value, returns  tuple
+    #gets index of desired.hashValue, returns  tuple
     indexOfBlank = source.state.getIndex(0)
     print ("index of blank space is: ", indexOfBlank)
 
@@ -73,7 +74,8 @@ def main():
     print ("testing child states class...")
     children = expandedState.getChildStates()
     for child in children:
-        child.display()         
+        child.display()
+        print (child.hashValue)
 
     
 if __name__=='__main__':
