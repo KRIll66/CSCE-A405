@@ -37,7 +37,7 @@ class Nodelists:
         #find hash val for Goal State
         temp = state.State(goal_state_tble).get_hash()
         #if it's in closed list go to helper function for recursive printing
-        val = self.closedlist.get(temp).item
+        val = self.closedlist.get(temp)
         print(val)
         if val:
             self.recursive_helper(val)

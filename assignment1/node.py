@@ -28,11 +28,12 @@ import state
 
 @dataclass(order=True)
 class Node:
-    priority: int 
-    item: Any=field(compare=False)
+    
 
 #constructor
     def __init__ (self, values, parent, level):
+        priority: int 
+        item: Any=field(compare=False)
         self.state = state.State(values)
         self.parent = parent
         self.level = level
