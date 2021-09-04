@@ -41,7 +41,7 @@ def main():
     goal.display()
     print ("Starting State:", end = "")
     source.display()
-    """
+    
     #gets manhattan distance from sourcestate to goal state
     mhd = source.state.manhattanDistance(goal)
     print ("The hashvalue for source is :", source.state.value)
@@ -57,17 +57,6 @@ def main():
     testState = state.State(table2)
     expandedState = childstates.ChildStates(testState)
     expandedState.startingstate.display()
-<<<<<<< HEAD
-    expandedState.moveUp()
-    expandedState.startingstate.display()
-    expandedState.moveRight()
-    expandedState.startingstate.display()
-    expandedState.moveLeft()
-    expandedState.startingstate.display()
-    expandedState.moveDown()
-    expandedState.startingstate.display()
-""" 
-=======
 
     temp = expandedState.moveUp()
     temp.display()
@@ -80,6 +69,5 @@ def main():
 
 
     
->>>>>>> 9856af5b917a679ff2797ed9bbabc91d82e58322
 if __name__=='__main__':
         main()
