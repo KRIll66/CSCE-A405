@@ -29,7 +29,6 @@ blankcol = holds the column coordinate of the blank space in startingstate's gri
 
 @author: Marshall Pratt
 """
-import self as self
 import state
 import copy
 class ChildStates:

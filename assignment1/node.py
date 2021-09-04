@@ -19,22 +19,35 @@ VARIABLES:
 state: 2D list with the current values for this Node (TODO: make this an object)
 parent: pointer to parent Node
 
+ATTRIBUTES:
+priority: int
+Aside from int priority, Node values cannot be compared to one another.
+To make the item comparable, one must implement some sort of data structure that utilizes the int priority, (or some other mechanism)
 
-@author: Marshall Pratt
+
+@author: Marshall Pratt & Chris Hill
 """
+from dataclasses import dataclass, field
+from typing import Any
 import state
 
-
+@dataclass(order=True)
 class Node:
+    
+
+#constructor
     def __init__ (self, values, parent, level):
+        priority: int 
+        item: Any=field(compare=False)
         self.state = state.State(values)
         self.parent = parent
         self.level = level
+        self.hashval = self.state.value
         
         
-        
-#display the current state, recursively display parent states
+#display the node's state
     def display (self):
         self.state.display()
+
 
         
