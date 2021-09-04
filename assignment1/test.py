@@ -57,6 +57,7 @@ def main():
     testState = state.State(table2)
     expandedState = childstates.ChildStates(testState)
     expandedState.startingstate.display()
+<<<<<<< HEAD
     expandedState.moveUp()
     expandedState.startingstate.display()
     expandedState.moveRight()
@@ -66,5 +67,19 @@ def main():
     expandedState.moveDown()
     expandedState.startingstate.display()
 """ 
+=======
+
+    temp = expandedState.moveUp()
+    temp.display()
+    temp = expandedState.moveRight()
+    temp.display()
+    temp = expandedState.moveLeft()
+    temp.display()
+
+
+
+
+    
+>>>>>>> 9856af5b917a679ff2797ed9bbabc91d82e58322
 if __name__=='__main__':
         main()

@@ -30,7 +30,7 @@ blankcol = holds the column coordinate of the blank space in startingstate's gri
 @author: Marshall Pratt
 """
 import state
-
+import copy
 class ChildStates:
 
     #constructor is initialized with a state object, the coordinates of
@@ -38,43 +38,51 @@ class ChildStates:
     #just used the number 3 instead, but using a variable for the size of
     # the grid allows for future change.
     def __init__(self, state):
-        self.startingstate = state
-        tuple = self.startingstate.getIndex(0)
-        self.blankrow = tuple[0]
-        self.blankcol = tuple[1]
-        print("row ", self.blankrow)
-        print("col ", self.blankcol)
+        self.startingstate = copy.deepcopy(state)
 
 
     def moveUp(self):
-        copyOfState = self.startingstate
-        if(self.blankrow - 1 >= 0):
-            copyOfState.swap(self.blankrow, self.blankcol, self.blankrow - 1, self.blankcol)
+        copyOfState = copy.deepcopy(self.startingstate)
+        tuple = copyOfState.getIndex(0)
+        blankrow = tuple[0]
+        blankcol = tuple[1]
+        if(blankrow - 1 >= 0):
+            copyOfState.swap(blankrow, blankcol, blankrow - 1, blankcol)
             return copyOfState
 
     def moveRight(self):
-        copyOfState = self.startingstate
-        if(self.blankcol + 1 <= 3):
-            copyOfState.swap(self.blankrow, self.blankcol, self.blankrow, self.blankcol + 1)
+        copyOfState = copy.deepcopy(self.startingstate)
+        tuple = copyOfState.getIndex(0)
+        blankrow = tuple[0]
+        blankcol = tuple[1]
+        if(blankcol + 1 <= 3):
+            copyOfState.swap(blankrow, blankcol, blankrow, blankcol + 1)
             return copyOfState
 
     def moveDown(self):
-        copyOfState = self.startingstate
-        if(self.blankrow + 1 <= 3):
-            copyOfState.swap(self.blankrow, self.blankcol, self.blankrow + 1, self.blankcol)
+        copyOfState = copy.deepcopy(self.startingstate)
+        tuple = copyOfState.getIndex(0)
+        blankrow = tuple[0]
+        blankcol = tuple[1]
+        if(blankrow + 1 <= 3):
+            copyOfState.swap(blankrow, blankcol, blankrow + 1, blankcol)
             return copyOfState
 
     def moveLeft(self):
-        copyOfState = self.startingstate
-        if(self.blankcol - 1 >= 0):
-            copyOfState.swap(self.blankrow, self.blankcol, self.blankrow, self.blankcol - 1)
+        copyOfState = copy.deepcopy(self.startingstate)
+        tuple = copyOfState.getIndex(0)
+        blankrow = tuple[0]
+        blankcol = tuple[1]
+        if(blankcol - 1 >= 0):
+            copyOfState.swap(blankrow, blankcol, blankrow, blankcol - 1)
             return copyOfState
 
     #This method returns the possible expanded states of startingstate as
     # a tuple of State objects
     def getChildStates(self):
-        row = self.blankrow
-        col = self.blankcol
+        tuple = self.startingstate.getIndex(0)
+        row = tuple[0]
+        col = tuple[1]
 
         #The next four if-statements deal with corner spaces
         if (row == 0 and col == 0):
