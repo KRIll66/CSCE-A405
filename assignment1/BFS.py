@@ -20,24 +20,25 @@ class BFS:
         if self.currentNode.hashval == self.goalValue:
             return True, self.currentNode
 
-        #pushes starting node into openList
+        #pushes starting node into openlist
         self.list.push_to_openL(self.currentNode, 1)
         #execute loop until solution or failure
         while True:
             #reached end of possible options
-            if self.list.openList.empty():
+            if self.list.openlist.empty():
                 return False, None
 
             #pop top node from queue and add to closedList
-            self.currentNode = list.pop_openL
-            list.push_to_closedL(self.currentNode)
+            self.currentNode = self.list.pop_openL()
+            self.list.push_to_closedL(self.currentNode)
 
-            #get children from current node and push them onto the openList
+            #get children from current node and push them onto the openlist
             #if a child is the answer, return that node to main()
-            children = childstates.Childstates(self.currentNode.state)
-            for child in children:
-                    if child.hashVal not in self.list.openList or child.hashVal not in self.list.closedList:
-                        if child.hashVal == self.goalValue:
+            children = childstates.ChildStates(self.currentNode.state)
+            childrenStates = children.getChildStates()
+            for child in childrenStates:
+                    if child.value not in self.list.openlist or child.value not in self.list.closedlist:
+                        if child.value == self.goalValue:
                             return child
-                        self.openList.push_to_openL(child, 1)
+                        self.openlist.push_to_openL(child, 1)
         
