@@ -128,6 +128,9 @@ class State:
             if val in i:
                 return y, i.index(val)
             y+=1
+
+    def get_hash(self):
+        return self.value
     
 
 

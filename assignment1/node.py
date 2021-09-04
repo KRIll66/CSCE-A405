@@ -20,21 +20,27 @@ state: 2D list with the current values for this Node (TODO: make this an object)
 parent: pointer to parent Node
 
 
-@author: Marshall Pratt
+@author: Marshall Pratt & Chris Hill
 """
+from dataclasses import dataclass, field
+from typing import Any
 import state
 
-
+@dataclass(order=True)
 class Node:
+    priority: int 
+    item: Any=field(compare=False)
+
+#constructor
     def __init__ (self, values, parent, level):
         self.state = state.State(values)
         self.parent = parent
         self.level = level
         
         
-        
-#display the current state, recursively display parent states
+#display the node's state
     def display (self):
         self.state.display()
+
 
         

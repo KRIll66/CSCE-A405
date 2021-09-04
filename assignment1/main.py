@@ -23,7 +23,7 @@ The length of the Solution path
 A Sequence of the Solution path 
 """
 
-import node
+import node, list, state, sys 
 
 # slowly developing argument parser. 
 
@@ -32,23 +32,27 @@ def find_repeat(numbers):
     for num in numbers:
         #print(num)
         if num in seen:
-            raise ValueError('repeating values!')
+            print('repeating values!')
+            sys.exit()
         seen.add(num)
 
 def main():
         arr = input(" Enter digits [0-15], (seperated by commas), in any order as a START state for you 15-puzzle problem.\n") 
         arr = arr.split(",")
         if len(arr) < 16:
-                raise ValueError('too few digits!')
+                print('too few digits!')
+                sys.exit()
         if len(arr) > 16:
-                raise ValueError('too many digits!')
+                print('too many digits!')
+                sys.exit()
         find_repeat(arr)
 
         for index, item in enumerate(arr):
             #print(index, item)
             temp = int(item)
             if temp > 15 or temp < 0:
-                raise ValueError('invalid digit, must be 1-15')
+                print('invalid digit, must be 1-15')
+                sys.exit()
             arr[index] = temp
             if index % 4 == 3:
                 print("mod")
