@@ -44,14 +44,16 @@ def main():
     testState = state.State(table2)
     expandedState = childstates.ChildStates(testState)
     expandedState.startingstate.display()
-    expandedState.moveUp()
-    expandedState.startingstate.display()
-    expandedState.moveRight()
-    expandedState.startingstate.display()
-    expandedState.moveLeft()
-    expandedState.startingstate.display()
-    expandedState.moveDown()
-    expandedState.startingstate.display()
+
+    temp = expandedState.moveUp()
+    temp.display()
+    temp = expandedState.moveRight()
+    temp.display()
+    temp = expandedState.moveLeft()
+    temp.display()
+
+
+
 
     
 if __name__=='__main__':
