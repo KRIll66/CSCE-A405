@@ -14,17 +14,28 @@ Display:
 import node
 import state
 import childstates
+import nodelists
 
 def main():
     
     
     table1 = [[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,0]]
     table2 = [[2,5,3,4], [1,14,7,8], [9,10,11,12], [13,6,0,15]]
+    table3 = [[2,5,3,4], [1,7,14,8], [9,10,11,12], [13,6,0,15]]
     
     #creates a source Node
-    source = node.Node(table2, None, 1)
+    source = node.Node(table1, None, 1)
+    #creates a middle Node
+    middle = node.Node(table2, source, 2)
     #creates a goal Node
-    goal = node.Node(table1, None, 1)
+    goal = node.Node(table3, middle, 3)
+
+    dual_list = nodelists.Nodelists()
+    dual_list.push_to_closedL(source)
+    dual_list.push_to_closedL(middle)
+    dual_list.push_to_closedL(goal)
+    dual_list.print_closedL(table3)
+
     print ("Goal:", end = "")
     goal.display()
     print ("Starting State:", end = "")
@@ -39,6 +50,8 @@ def main():
     #gets index of desired value, returns  tuple
     indexOfBlank = source.state.getIndex(0)
     print ("index of blank space is: ", indexOfBlank)
+
+
 
     testState = state.State(table2)
     expandedState = childstates.ChildStates(testState)
