@@ -2,8 +2,14 @@
 #
 # nodelists.py
 #
+# This class is used for keeping track of  open and closed nodes.
+# Open Nodes are stored in a infinitely sized priority que, (openList), where priority is manually set when pushing a particular node
+# Openlist has a couple helper functions, push, and pop
+# 
+# Closed nodes are stored in closedlist, ( a dictionary of {Key: value} pairs), where the key is expected to be a hashvalue of the nodes state. (see node calss and state class) 
+# closedlist has helper functions: push to closed,  contains, (checking if it has a node with certain hash value), a recursive print function, and a purgelist
 #
-#
+# Chris Hill      -- rhill66@alaska.edu
 ##################################################################################################
 
 import queue, node, state, sys
@@ -12,20 +18,26 @@ from typing import Final
 class Nodelists:
 
     def __init__ (self): 
-        MAX_SIZE: Final  = 4 
+        #ensuring open list is infinite by setting it it's maxsize to -1
+        MAX_SIZE: Final  = -1 
         self.openList = queue.PriorityQueue(MAX_SIZE)
         self.closedlist = {}
     
+    # add node and its priority to open list
     def push_to_openL(self, child_node, priority):
         self.openlist.put(child_node, priority)
 
+    # return and remove node from open list
     def pop_openL(self):
-        self.openlist.get()
+        return self.openlist.get()
 
+    # add node to closed list
     def push_to_closedL(self, node):
         self.closedlist[node.state.get_hash()] = node
     
-    def openL_contains(self, hash):
+    # check if closed list contains node by compare hash value key
+    # returns boolean
+    def closedL_contains(self, hash):
         if self.closedlist.get(hash):
             return True
         else:

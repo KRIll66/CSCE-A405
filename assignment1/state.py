@@ -129,6 +129,7 @@ class State:
                 return y, i.index(val)
             y+=1
 
+    #returns a given states hash value
     def get_hash(self):
         return self.value
     

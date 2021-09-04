@@ -19,6 +19,11 @@ VARIABLES:
 state: 2D list with the current values for this Node (TODO: make this an object)
 parent: pointer to parent Node
 
+ATTRIBUTES:
+priority: int
+Aside from int priority, Node values cannot be compared to one another.
+To make the item comparable, one must implement some sort of data structure that utilizes the int priority, (or some other mechanism)
+
 
 @author: Marshall Pratt & Chris Hill
 """
