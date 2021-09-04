@@ -42,6 +42,7 @@ class Node:
         self.state = state.State(values)
         self.parent = parent
         self.level = level
+        self.hashval = self.state.value
         
         
 #display the node's state

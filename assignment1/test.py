@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+
 """
 Created on Tue Aug 31 18:25:01 2021
 
@@ -8,13 +8,12 @@ manhattan distance
 
 Display:
     goal state, starting state, hashvalue, manhattan distance
-
-@author: marsh
 """
-import node
-import state
-import childstates
-import nodelists
+import node, state, childstates, nodelists, BFS
+
+
+
+
 
 def main():
     
@@ -30,11 +29,24 @@ def main():
     #creates a goal Node
     goal = node.Node(table3, middle, 3)
 
+    #BFS class test
+    print ("start of BFS test")
+    thisBFS = BFS.BFS(table1, table2)
+    hasSolution, solution = thisBFS.runBFS()
+    if hasSolution:
+        print ("there is a solution:")
+        solution.display()
+    else: print ("no solution found")
+    print ("end of BFS test")
+
+
+    print ("start of nodeLists test")
     dual_list = nodelists.Nodelists()
     dual_list.push_to_closedL(source)
     dual_list.push_to_closedL(middle)
     dual_list.push_to_closedL(goal)
     dual_list.print_closedL(table3)
+    print ("end of nodeLists test")
 
     print ("Goal:", end = "")
     goal.display()
@@ -57,52 +69,14 @@ def main():
     expandedState = childstates.ChildStates(testState)
     expandedState.startingstate.display()
 
-    temp = expandedState.moveUp()
-    temp.display()
-    temp = expandedState.moveRight()
-    temp.display()
-    temp = expandedState.moveLeft()
-    temp.display()
-
-
+    #test for childstates class
+    print ("testing child states class...")
+    children = expandedState.getChildStates()
+    for child in children:
+        child.display()         
 
     
 if __name__=='__main__':
         main()
 
 
-def BFS (start, goal):
-    """
-    VARIABLES 
-    frontier = fifo queue of next nodes to search
-    explored = set of explored nodes for comparison to child nodes 
-    currentNode = our first node, no parent and path cost of 0
-    TODO: change all instances of closedlist and openlist using list class
-    """
-    currentNode = node.Node(start, None, 0)
-    #list = nodelists.Nodelsits()
-    
-    #if start state is the goal, return solution
-    if start == goal:
-        return currentNode
-
-    #execute loop until solution or failure
-    while True:
-        #reached end of possible options
-        """"
-        if list.openList.empty():
-            return "no solution"
-
-        #pop top node from queue and add to closedList
-        currentNode = list.pop_openL
-        list.push_to_closedL(currentNode)
-
-        #get children from current node and push them onto the openList
-        #if a child is the answer, return that node to main()
-        TODO: children = childstate.Childstates(currentNode.state)
-        TODO: for child in children:
-                if child.hashVal not in openList or child.hashVal not in closedList:
-                    if child.state == start:
-                        return child
-                    openList.push_to_openL(child, 1)
-        """

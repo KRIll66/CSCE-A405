@@ -20,7 +20,7 @@ class Nodelists:
     def __init__ (self): 
         #ensuring open list is infinite by setting it it's maxsize to -1
         MAX_SIZE: Final  = -1 
-        self.openList = queue.PriorityQueue(MAX_SIZE)
+        self.openlist = queue.PriorityQueue(MAX_SIZE)
         self.closedlist = {}
     
     # add node and its priority to open list
@@ -72,7 +72,7 @@ class Nodelists:
 
     #clearing p.queue and dictionary data incase we decide to loop program
     def purgelist(self):
-        self.openList.queue.clear()
+        self.openlist.queue.clear()
         self.closedlist.clear()
 
 
