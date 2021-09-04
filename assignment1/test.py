@@ -15,7 +15,6 @@ import node
 import state
 import childstates
 
-
 def main():
     
     
@@ -54,7 +53,43 @@ def main():
 
 
 
-
     
 if __name__=='__main__':
         main()
+
+
+def BFS (start, goal):
+    """
+    VARIABLES 
+    frontier = fifo queue of next nodes to search
+    explored = set of explored nodes for comparison to child nodes 
+    currentNode = our first node, no parent and path cost of 0
+    TODO: change all instances of closedlist and openlist using list class
+    """
+    currentNode = node.Node(start, None, 0)
+    #list = nodelists.Nodelsits()
+    
+    #if start state is the goal, return solution
+    if start == goal:
+        return currentNode
+
+    #execute loop until solution or failure
+    while True:
+        #reached end of possible options
+        """"
+        if list.openList.empty():
+            return "no solution"
+
+        #pop top node from queue and add to closedList
+        currentNode = list.pop_openL
+        list.push_to_closedL(currentNode)
+
+        #get children from current node and push them onto the openList
+        #if a child is the answer, return that node to main()
+        TODO: children = childstate.Childstates(currentNode.state)
+        TODO: for child in children:
+                if child.hashVal not in openList or child.hashVal not in closedList:
+                    if child.state == start:
+                        return child
+                    openList.push_to_openL(child, 1)
+        """
