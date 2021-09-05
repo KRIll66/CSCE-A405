@@ -16,15 +16,18 @@ class BFS:
     #displays it all in appropriate order
     def displayBFS (self, goal):
         print ("Number of Nodes created: ", self.nodeCount)
-        print ("Numebr of levels: ", goal.level)
+        print ("Number of levels: ", goal.level)
         temp = goal
         path = queue.LifoQueue()
+        #populate a LIFO queue with the path from goal back to start
         while (temp != None):
             path.put(temp)
             temp = temp.parent
-        while path.not_empty:
+        #display the path from start to goal
+        while not path.empty():
             temp = path.get()
             temp.display()
+        return
     
 
 
