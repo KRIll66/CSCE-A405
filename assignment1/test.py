@@ -41,44 +41,7 @@ def main():
     else: print ("no solution found")
     print ("end of BFS test")
     
-    """
-    print ("start of nodeLists test")
-    dual_list = nodelists.Nodelists()
-    dual_list.push_to_closedL(source)
-    dual_list.push_to_closedL(middle)
-    dual_list.push_to_closedL(goal)
-    dual_list.print_closedL(table3)
-    print ("end of nodeLists test")
-
-    print ("Goal:", end = "")
-    goal.display()
-    print ("Starting State:", end = "")
-    source.display()
-    
-    #gets manhattan distance from sourcestate to goal state
-    mhd = source.state.manhattanDistance(goal)
-    print ("The hashvalue for source is :", source.state.hashValue)
-    print ("The hashvalue for goal is :", goal.state.hashValue)
-    print ("the manhattan distance is:", mhd)
-    
-    #gets index of desired.hashValue, returns  tuple
-    indexOfBlank = source.state.getIndex(0)
-    print ("index of blank space is: ", indexOfBlank)
-
-
-
-    testState = state.State(table2)
-    expandedState = childstates.ChildStates(testState)
-    expandedState.startingstate.display()
-
-    #test for childstates class
-    print ("testing child states class...")
-    children = expandedState.getChildStates()
-    for child in children:
-        child.display()
-        print (child.hashValue)
-    """
-    
+        
 if __name__=='__main__':
         main()
 
