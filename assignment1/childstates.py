@@ -26,8 +26,6 @@ startingstate = holds a State object
 blankrow = holds the row coordinate of the blank space in startingstate's grid
 blankcol = holds the column coordinate of the blank space in startingstate's grid
 
-
-@author: Marshall Pratt
 """
 import state
 import copy
@@ -100,7 +98,7 @@ class ChildStates:
             temp2 = self.moveRight()
             return temp1, temp2
 
-        if (row == 0 and col == 0):
+        if (row == 3 and col == 3):
             temp1 = self.moveUp()
             temp2 = self.moveLeft()
             return temp1, temp2

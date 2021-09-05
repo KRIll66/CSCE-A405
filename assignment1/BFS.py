@@ -1,19 +1,38 @@
-import node, state, childstates, nodelists
+import node, state, childstates, nodelists, queue
 
 
 class BFS:
 
 
-    def __init__(self, start, goal):
-        self.currentNode = node.Node(start, None, 0)
+    def __init__(self, goal, start):
+        self.currentNode = node.Node(start, None, 1)
         self.goal = node.Node(goal, None, 0)
         self.goalValue = self.goal.hashval
         self.list = nodelists.Nodelists()
-        self.nodeCount = 0
+        self.nodeCount = 1
+
+
+    #populates a lifo queue with the path from goal to start
+    #displays it all in appropriate order
+    def displayBFS (self, goal):
+        print ("Number of Nodes created: ", self.nodeCount)
+        print ("Number of levels: ", goal.level)
+        temp = goal
+        path = queue.LifoQueue()
+        #populate a LIFO queue with the path from goal back to start
+        while (temp != None):
+            path.put(temp)
+            temp = temp.parent
+        #display the path from start to goal
+        while not path.empty():
+            temp = path.get()
+            temp.display()
+        
     
 
 
-
+    #this method performs the BFS search
+    #returns a boolean operator and a node object of the found goal
     def runBFS (self):
 
         #if start state is the goal, return solution            
@@ -37,8 +56,11 @@ class BFS:
             children = childstates.ChildStates(self.currentNode.state)
             childrenStates = children.getChildStates()
             for child in childrenStates:
-                    if child.value not in self.list.openlist or child.value not in self.list.closedlist:
-                        if child.value == self.goalValue:
-                            return child
-                        self.openlist.push_to_openL(child, 1)
+                    if child.hashValue not in self.list.closedlist:
+                        #create a new node object for this child
+                        newNode = node.Node(child.table, self.currentNode, self.currentNode.level + 1)
+                        self.nodeCount += 1
+                        if child.hashValue == self.goalValue:
+                            return True, newNode
+                        self.list.push_to_openL(newNode, 1)
         
