@@ -27,7 +27,7 @@ class BFS:
         while not path.empty():
             temp = path.get()
             temp.display()
-        return
+        
     
 
 
@@ -56,7 +56,7 @@ class BFS:
             children = childstates.ChildStates(self.currentNode.state)
             childrenStates = children.getChildStates()
             for child in childrenStates:
-                    #if child.hashValue not in self.list.openlist or child.hashValue not in self.list.closedlist:
+                    if child.hashValue not in self.list.closedlist:
                         #create a new node object for this child
                         newNode = node.Node(child.table, self.currentNode, self.currentNode.level + 1)
                         self.nodeCount += 1
