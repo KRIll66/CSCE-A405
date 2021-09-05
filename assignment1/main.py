@@ -1,13 +1,11 @@
 
-
-
 """
 Marshall Pratt  --
-Lydia Stark     --
+Lydia Stark     -- lydiarstark@gmail.com
 Chris Hill      -- rhill66@alaska.edu
 
 Assignment 1
-CSCE A405 
+CSCE A405
 
 main.py
 
