@@ -29,7 +29,19 @@ def main():
     #creates a goal Node
     goal = node.Node(table3, middle, 3)
     
+    data = nodelists.Nodelists()
+    data.push_to_openL(source, 3)
+    data.push_to_openL(middle, 2)
+    data.push_to_openL(goal, 1)
     
+    # printing original 
+    print("OG openL : " + str(data.openlist) + "\n")
+
+    data.sort_openL()
+
+    # printing sorted by priority
+    print("sorted openL : " + str(data.openlist)+ "\n")
+
     #BFS class test
     print ("start of BFS test")
 
@@ -41,7 +53,7 @@ def main():
     else: print ("no solution found")
     print ("end of BFS test")
     
-        
+
 if __name__=='__main__':
         main()
 
