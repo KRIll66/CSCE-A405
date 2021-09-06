@@ -32,6 +32,8 @@ class Nodelists:
     def __init__ (self): 
         self.openlist = {}
         self.closedlist = {}
+        #added nodelist to account for all expanded nodes
+        self.nodelist = {}
     
     # add node and its priority to open list
     # input: 
@@ -40,11 +42,18 @@ class Nodelists:
     # output:
     #   none
     def push_to_openL(self, child_node, priority):
-        self.openlist[child_node.state.get_hash()] = { priority, child_node }
+        #self.openlist[child_node.state.get_hash()] = { priority, child_node }
+        self.openlist[child_node.state.get_hash()] = [ priority, child_node ]
 
     # return node from top of openL
     def pop_openL(self):
-        return self.openlist.pop()
+        #added this section of code to remove first node object from 
+        #dictionary - Marshall Pratt
+        first_key = next(iter(self.openlist))
+        first_value = self.openlist.pop(first_key)
+        first_node = first_value[1]
+        return first_node
+        #return self.openlist.pop()
 
     # sort openlist by priority for A* or Greedy BFS
     def sort_openL(self):

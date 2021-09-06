@@ -44,7 +44,7 @@ class BFS:
         #execute loop until solution or failure
         while True:
             #reached end of possible options
-            if self.list.openlist.empty():
+            if len(self.list.openlist) == 0:
                 return False, None
 
             #pop top node from queue and add to closedList
@@ -56,7 +56,7 @@ class BFS:
             children = childstates.ChildStates(self.currentNode.state)
             childrenStates = children.getChildStates()
             for child in childrenStates:
-                    if child.hashValue not in self.list.closedlist:
+                    if child.hashValue not in self.list.closedlist and child.hashValue not in self.list.openlist:
                         #create a new node object for this child
                         newNode = node.Node(child.table, self.currentNode, self.currentNode.level + 1)
                         self.nodeCount += 1
