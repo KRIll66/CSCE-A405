@@ -21,6 +21,7 @@ hashVal: unique hashvalue for this state table
 
 @author: Marshall Pratt
 """
+import hashlib
 
 class State:
     def __init__ (self, table):
