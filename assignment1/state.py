@@ -21,6 +21,7 @@ hashVal: unique hashvalue for this state table
 
 @author: Marshall Pratt
 """
+import hashlib
 
 class State:
     def __init__ (self, table):
@@ -42,20 +43,17 @@ class State:
     evaluates [1,2,3] as 1^0 + 2^1 + 3^2...
     """   
     def hashval (self):
-        sum = 0             #will be a unique hashVal for every possible state
-        hashVal = 0         #choose modulo to generate fewer collisions
-        multiplier = 0      #used as the power        
-        
+
+        intarray = []
+
         for i in self.table:
-            
-            #calculate sum using polynomial 
             for j in i:
-                sum = sum + pow(j, multiplier)
-                multiplier += 1     
+                intarray.append(j)
+
+        bytarray = bytearray(intarray)
+        hashVal = hashlib.sha256(bytarray).hexdigest()
         
-             #if we don't want the full hashVal of sum, choose modulo and 
-             #assign to hashVal
-        return sum
+        return hashVal
                 
                 
    

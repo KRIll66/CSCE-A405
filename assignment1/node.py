@@ -27,18 +27,14 @@ To make the item comparable, one must implement some sort of data structure that
 
 @author: Marshall Pratt & Chris Hill
 """
-from dataclasses import dataclass, field
-from typing import Any
+
 import state
 
-@dataclass(order=True)
 class Node:
     
 
 #constructor
-    def __init__ (self, values, parent, level):
-        priority: int 
-        item: Any=field(compare=False)
+    def __init__ (self, values, parent, level):    
         self.state = state.State(values)
         self.parent = parent
         self.level = level
