@@ -30,27 +30,16 @@ class State:
             
  
     """
-    hashval calcualtes a hash valure for the table in the current state.
-    To generate a unique number for each possible state this function uses 
-    a polynomial approach, this returns a very large and unique integer for 
-    each possible state. To make this work the blank hashVal must be stored as 
-    a zero in the table.
-    
-    generates max val of ~ 4.5 x 10^17, min val of ~ 3.3 x 10^6
-    
-    can return unique hashVal as well as hash hashVal
-    
-    evaluates [1,2,3] as 1^0 + 2^1 + 3^2...
+    genrerate hash using sha256 (returns up to ~1x10^77 possible values)
+    parses 2d array into 1d bytearray for direct encoding
     """   
     def hashval (self):
 
-        intarray = []
+        bytarray = bytearray()
 
         for i in self.table:
-            for j in i:
-                intarray.append(j)
-
-        bytarray = bytearray(intarray)
+            bytarray = bytarray + bytearray(i)   
+                   
         hashVal = hashlib.sha256(bytarray).hexdigest()
         
         return hashVal
