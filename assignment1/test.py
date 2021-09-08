@@ -31,10 +31,10 @@ def main():
     print ("start of BFS test")
 
 
-    thisBFS = BFS.BFS(table1, table4)
+    thisBFS = BFS.BFS(table1, table2)
     #we must now pass the opcode 0, 1, or 2 into BFS
     # 0 = BFS, 1 = GBFS, 2 = A star
-    hasSolution, solution = thisBFS.runBFS(0)
+    hasSolution, solution = thisBFS.runBFS(2)
     if hasSolution:
         print ("there is a solution!:")
         thisBFS.displayBFS(solution)

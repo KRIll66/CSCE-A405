@@ -70,6 +70,7 @@ class BFS:
                         if(code == 0):
                             f = 1
 
+
                         #f is only the manhattan value for greedy best-first search
                         if(code == 1):
                             f = newNode.state.manhattanDistance(self.goal)
@@ -78,6 +79,7 @@ class BFS:
                         if(code == 2):
                             f = newNode.state.manhattanDistance(self.goal) + newNode.level
 
+                        #print(f)
                         self.list.push_to_openL(newNode, f)
 
 
