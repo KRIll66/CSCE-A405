@@ -33,7 +33,7 @@ class BFS:
 
     #this method performs the BFS search
     #returns a boolean operator and a node object of the found goal
-    def runBFS (self):
+    def runBFS (self, code):
 
         #if start state is the goal, return solution            
         if self.currentNode.hashval == self.goalValue:
@@ -55,12 +55,30 @@ class BFS:
             #if a child is the answer, return that node to main()
             children = childstates.ChildStates(self.currentNode.state)
             childrenStates = children.getChildStates()
+
+            f = 0 #cost of expanding to a state, set by default to BFS
+
             for child in childrenStates:
                     if child.hashValue not in self.list.closedlist and child.hashValue not in self.list.openlist:
                         #create a new node object for this child
                         newNode = node.Node(child.table, self.currentNode, self.currentNode.level + 1)
                         self.nodeCount += 1
+
                         if child.hashValue == self.goalValue:
                             return True, newNode
-                        self.list.push_to_openL(newNode, 1)
-        
+                        #f is always one for BFS
+                        if(code == 0):
+                            f = 1
+
+                        #f is only the manhattan value for greedy best-first search
+                        if(code == 1):
+                            f = newNode.state.manhattanDistance(self.goal)
+
+                        #f is the manhattan value and the level for A star
+                        if(code == 2):
+                            f = newNode.state.manhattanDistance(self.goal) + newNode.level
+
+                        self.list.push_to_openL(newNode, f)
+
+
+

@@ -26,8 +26,7 @@ import hashlib
 class State:
     def __init__ (self, table):
         self.table = table
-        self.hashValue = self.hashval() 
-            
+        self.hashValue = self.hashval()
  
     """
     hashval calcualtes a hash valure for the table in the current state.
@@ -60,11 +59,11 @@ class State:
     #calculate the manhattan distance between self and parent     
     #this appends each state table into a 1D array for easier 
     #navigation for the manhattan distance
-    def manhattanDistance (self, goalState):
+    def manhattanDistance (self, goalNode):
         
         current=[]  #this state
-        goal=[]     #target state
-        mhd = 0     #stores manhattan distance
+        goal = []#target state
+        mhd = 0  #stores manhattan distance
         
         #append self and parent state tables into 1D list for ease of  
         #calcualting manahttan distance values
@@ -72,7 +71,7 @@ class State:
             for j in i:
                 current.append(j)
                 
-        for i in goalState.state.table:
+        for i in goalNode.state.table:
             for j in i:
                 goal.append(j)        
 
