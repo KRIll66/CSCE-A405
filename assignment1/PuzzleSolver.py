@@ -1,7 +1,7 @@
 import node, state, childstates, nodelists, queue
 
 
-class BFS:
+class PuzzleSolver:
 
 
     def __init__(self, goal, start):
@@ -14,7 +14,7 @@ class BFS:
 
     #populates a lifo queue with the path from goal to start
     #displays it all in appropriate order
-    def displayBFS (self, goal):
+    def displayPuzzle (self, goal):
         print ("Number of Nodes created: ", self.nodeCount)
         print ("Number of levels: ", goal.level)
         temp = goal
@@ -31,9 +31,13 @@ class BFS:
     
 
 
-    #this method performs the BFS search
-    #returns a boolean operator and a node object of the found goal
-    def runBFS (self, code):
+    #this method solves the puzzle using one of three algorithms:
+    #Breadth First Search
+    #Greedy Best-First Search
+    #A star
+    #It takes in an opcode as an integer, and returns a boolean operator
+    # and a node object of the found goal
+    def solvePuzzle(self, code):
 
         #if start state is the goal, return solution            
         if self.currentNode.hashval == self.goalValue:
