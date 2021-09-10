@@ -24,15 +24,14 @@
 # Chris Hill      -- rhill66@alaska.edu
 ##################################################################################################
 
-import node, state, sys
+import node, state, queue, sys
 from typing import Final
 
 class Nodelists:
 
     def __init__ (self): 
-        self.openlist = {}
+        self.openlist = queue.PriorityQueue(0) # If parameter maxsize is less than or equal to zero, the queue size is infinite.
         self.closedlist = {}
-        #added nodelist to account for all expanded nodes
         self.nodelist = {}
     
     # add node and its priority to open list
@@ -42,30 +41,12 @@ class Nodelists:
     # output:
     #   none
     def push_to_openL(self, child_node, priority):
-        #self.openlist[child_node.state.get_hash()] = { priority, child_node }
-        self.openlist[child_node.state.get_hash()] = [ priority, child_node ]
+        #chris Hill
+        self.openlist.put((priority, child_node))
 
     # return node from top of openL
     def pop_openL(self):
-        #added this section of code to remove first node object from 
-        #dictionary - Marshall Pratt
-        first_key = next(iter(self.openlist))
-        first_value = self.openlist.pop(first_key)
-        first_node = first_value[1]
-        return first_node
-        #return self.openlist.pop()
-
-    # sort openlist by priority for A* or Greedy BFS
-    def sort_openL(self):
-        sorted(self.openlist.items(), key=lambda d: d[1])
-
-    # check if open list contains node by compare hash value key
-    # returns boolean
-    def openL_contains(self, hash):
-        if self.openlist.get(hash):
-            return True
-        else:
-            return False
+        return self.openlist.get()
 
     # add node to closed list
     def push_to_closedL(self, node):
@@ -110,6 +91,7 @@ class Nodelists:
     def purgelist(self):
         self.openlist.clear()
         self.closedlist.clear()
+        self.nodelist.clear()
 
 
 
