@@ -43,16 +43,18 @@ class PuzzleSolver:
         if self.currentNode.hashval == self.goalValue:
             return True, self.currentNode
 
-        #pushes starting node into openlist
+        #pushes starting node into openlist and into cache
         self.list.push_to_openL(self.currentNode, 1)
+        self.list.push_to_cache(self.currentNode)
         #execute loop until solution or failure
         while True:
             #reached end of possible options
-            if len(self.list.openlist) == 0:
+            if self.list.openlist.qsize() == 0:
                 return False, None
 
             #pop top node from queue and add to closedList
             self.currentNode = self.list.pop_openL()
+            self.currentNode=  self.currentNode[1]
             self.list.push_to_closedL(self.currentNode)
 
             #get children from current node and push them onto the openlist
@@ -63,7 +65,7 @@ class PuzzleSolver:
             f = 0 #cost of expanding to a state, set by default to BFS
 
             for child in childrenStates:
-                    if child.hashValue not in self.list.closedlist and child.hashValue not in self.list.openlist:
+                    if child.hashValue not in self.list.closedlist and child.hashValue not in  self.list.cache:
                         #create a new node object for this child
                         newNode = node.Node(child.table, self.currentNode, self.currentNode.level + 1)
                         self.nodeCount += 1
@@ -85,6 +87,7 @@ class PuzzleSolver:
 
                         #print(f)
                         self.list.push_to_openL(newNode, f)
+                        self.list.push_to_cache(newNode)
 
 
 

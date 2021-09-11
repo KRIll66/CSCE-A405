@@ -32,10 +32,10 @@ class Nodelists:
     def __init__ (self): 
         self.openlist = queue.PriorityQueue(0) # If parameter maxsize is less than or equal to zero, the queue size is infinite.
         self.closedlist = {}
-        self.nodelist = {}
+        self.cache = {}
     
     # add node and its priority to open list
-    # input: 
+    # input:
     #   child_node - a Node object
     #   priority - a unique iterable value, (int, float, double, etc.)
     # output:
@@ -56,6 +56,18 @@ class Nodelists:
     # returns boolean
     def closedL_contains(self, hash):
         if self.closedlist.get(hash):
+            return True
+        else:
+            return False
+
+        # add node to closed list
+    def push_to_cache(self, node):
+        self.cache[node.state.get_hash()] = node
+
+    # check if closed list contains node by compare hash value key
+    # returns boolean
+    def cache_contains(self, hash):
+        if self.cache.get(hash):
             return True
         else:
             return False
