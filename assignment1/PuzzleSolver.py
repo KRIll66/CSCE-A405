@@ -73,16 +73,16 @@ class PuzzleSolver:
                         if child.hashValue == self.goalValue:
                             return True, newNode
                         #f is always one for BFS
-                        if(code == 0):
+                        if(code == 1):
                             f = 1
 
 
                         #f is only the manhattan value for greedy best-first search
-                        if(code == 1):
+                        if(code == 2):
                             f = newNode.state.manhattanDistance(self.goal)
 
                         #f is the manhattan value and the level for A star
-                        if(code == 2):
+                        if(code == 3):
                             f = newNode.state.manhattanDistance(self.goal) + newNode.level
 
                         #print(f)

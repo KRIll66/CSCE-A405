@@ -25,14 +25,13 @@ A Sequence of the Solution path
 @author Chris Hill
 """
 
-import node, nodelists, state, sys 
+import node, nodelists, PuzzleSolver, state, copy, sys 
 
 # slowly developing argument parser. 
 
 def find_repeat(numbers):
     seen = set()
     for num in numbers:
-        #print(num)
         if num in seen:
             raise ValueError('repeating values!')
         seen.add(num)
@@ -41,9 +40,12 @@ def find_repeat(numbers):
 
 def main():
     trigger = True
+   
+    goal_table = []
     while trigger:
         start = input("\nEnter digits [0-15], (seperated by commas), in any order as a START state for you 15-puzzle problem.\n") 
         start = start.split(",")
+        
         if len(start) < 16:
                 print('\nToo few digits! Please try again.\n')
                 start.clear()
@@ -58,19 +60,21 @@ def main():
             print('\nPlease do not repeat values. Please try again.\n')
             start.clear()
             continue
-
+        temp_arr = []
+        start_table =[]
         for index, item in enumerate(start):
-            #print(index, item)
             temp = int(item)
             if temp > 15 or temp < 0:
                 print('\nInvalid digit, must be 1-15. Please try again.\n')
                 start.clear()
                 continue
-            start[index] = temp
+            temp_arr.append(temp)
             if index % 4 == 3:
-                print("\nmod\n")
-                trigger = False
-                break
+                start_table.append(copy.deepcopy(temp_arr))
+                temp_arr.clear()
+        trigger = False
+        break
+    print(start_table)
     trigger = True
     while trigger:
         goal = input("\nNow do using the same format, enter digits [0-15], for a  Goal state.\n") 
@@ -89,24 +93,40 @@ def main():
             print('\nPlease do not type repeating values. Please try again.\n')
             goal.clear()
             continue
-
+        temp_arr2 = []
+        goal_table =[]
         for index, item in enumerate(goal):
-            #print(index, item)
             temp = int(item)
             if temp > 15 or temp < 0:
                 print('\nInvalid digit, must be 1-15. Please try again.\n')
                 goal.clear()
                 continue
-            goal[index] = temp
+            temp_arr2.append(temp)
             if index % 4 == 3:
-                print("\nmod\n")
-                trigger = False
-                break
-    print("\n MADE IT TO END\n")
-    
-    
-       
-
+                goal_table.append(copy.deepcopy(temp_arr2))
+                temp_arr2.clear()
+        trigger = False
+        break
+    print(goal_table)
+    trigger = True
+    while trigger:
+        user_selection = input("\n Please enter one of the following numbers to select a type of search:\n 1    - BFS\n 2    - Greedy BFS\n 3    - A*\n")
+        if user_selection != 1 or   user_selection != "2" or   user_selection != "3":
+            print("Invalid entry. Please try again.\n")
+            continue
+        else:
+            trigger = False
+            break
+    #pass tables into puzzle solver along with BFS, Greedy BFS, or A* code selection
+    thisPuzzle = PuzzleSolver.PuzzleSolver(start_table, goal_table)
+    #we must now pass the opcode 0, 1, or 2 into BFS
+    # 1 = BFS, 2 = GBFS, 3 = A star
+    hasSolution, solution = thisPuzzle.solvePuzzle(int(user_selection))
+    if hasSolution:
+        print ("there is a solution!:\n")
+        thisPuzzle.displayPuzzle(solution)
+    else: print ("no solution found\n")
+    print ("end of BFS test\n")
         
 if __name__=='__main__':
         main()
