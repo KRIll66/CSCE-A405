@@ -24,13 +24,13 @@
 # Chris Hill      -- rhill66@alaska.edu
 ##################################################################################################
 
-import node, state, queue, sys
+import node, state, queue, sys, heapq
 from typing import Final
 
 class Nodelists:
 
     def __init__ (self): 
-        self.openlist = queue.PriorityQueue(0) # If parameter maxsize is less than or equal to zero, the queue size is infinite.
+        self.openlist = [] #openlist as a hashq
         self.closedlist = {}
         self.cache = {}
     
@@ -38,15 +38,17 @@ class Nodelists:
     # input:
     #   child_node - a Node object
     #   priority - a unique iterable value, (int, float, double, etc.)
+    #   count   - used to ensure FIFO operation for identical priorities
     # output:
     #   none
-    def push_to_openL(self, child_node, priority):
-        #chris Hill
-        self.openlist.put((priority, child_node))
-
+    def push_to_openL(self, child_node, priority, count):
+        entry = [priority, count, child_node]   #stores the entry as a list, count ensures FIFO
+        heapq.heappush(self.openlist, entry)    
+        
     # return node from top of openL
     def pop_openL(self):
-        return self.openlist.get()
+        priority, count, value = heapq.heappop(self.openlist)   #retrieve the node object
+        return value
 
     # add node to closed list
     def push_to_closedL(self, node):

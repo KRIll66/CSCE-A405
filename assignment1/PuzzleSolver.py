@@ -44,17 +44,17 @@ class PuzzleSolver:
             return True, self.currentNode
 
         #pushes starting node into openlist and into cache
-        self.list.push_to_openL(self.currentNode, 1)
+        self.list.push_to_openL(self.currentNode, 1, 0)
         self.list.push_to_cache(self.currentNode)
         #execute loop until solution or failure
         while True:
             #reached end of possible options
-            if self.list.openlist.qsize() == 0:
+            if len(self.list.openlist) == 0:
                 return False, None
 
             #pop top node from queue and add to closedList
             self.currentNode = self.list.pop_openL()
-            self.currentNode=  self.currentNode[1]
+            #self.currentNode=  self.currentNode[1]
             self.list.push_to_closedL(self.currentNode)
 
             #get children from current node and push them onto the openlist
@@ -74,19 +74,22 @@ class PuzzleSolver:
                             return True, newNode
                         #f is always one for BFS
                         if(code == 1):
-                            f = 1
+                            priority = 1
+                            count = self.nodeCount
 
 
                         #f is only the manhattan value for greedy best-first search
                         if(code == 2):
-                            f = newNode.state.manhattanDistance(self.goal)
+                            priority = newNode.state.manhattanDistance(self.goal)
+                            count = 1
 
                         #f is the manhattan value and the level for A star
                         if(code == 3):
-                            f = newNode.state.manhattanDistance(self.goal) + newNode.level
+                            priority = newNode.state.manhattanDistance(self.goal) + newNode.level
+                            count = 1
 
                         #print(f)
-                        self.list.push_to_openL(newNode, f)
+                        self.list.push_to_openL(newNode, priority, count)
                         self.list.push_to_cache(newNode)
 
 
