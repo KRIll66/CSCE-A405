@@ -27,8 +27,7 @@ A Sequence of the Solution path
 
 import node, nodelists, PuzzleSolver, state, copy, sys 
 
-# slowly developing argument parser. 
-
+# helper function that looks for any repeating values in a set of numbers, (any set of char's really), and throws error is it finds a repeat
 def find_repeat(numbers):
     seen = set()
     for num in numbers:
@@ -39,13 +38,15 @@ def find_repeat(numbers):
     
 
 def main():
+    acceptable_values = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"]
+    start = ""
+    goal = ""
+    # Start State user input error Checking
+    print("\nWelcome to 15-puzzle solver. Please follow the prompts for input. If you'd like to exit at any time, press (ctrl + c ) on your keyboard.")
     trigger = True
-   
-    goal_table = []
     while trigger:
-        start = input("\nEnter digits [0-15], (seperated by commas), in any order as a START state for you 15-puzzle problem.\n") 
+        start = input("\nEnter digits [0-15], (seperated by commas), in any order as a START state for your 15-puzzle problem.\nExample: 0,1,2,9,14,5,6,7,8,3,11,12,10,13,4,15\n") 
         start = start.split(",")
-        
         if len(start) < 16:
                 print('\nToo few digits! Please try again.\n')
                 start.clear()
@@ -57,27 +58,21 @@ def main():
         try: 
             find_repeat(start)
         except(ValueError):
-            print('\nPlease do not repeat values. Please try again.\n')
+            print('\nDo not repeat values. Please try again.\n')
             start.clear()
             continue
-        temp_arr = []
-        start_table =[]
-        for index, item in enumerate(start):
-            temp = int(item)
-            if temp > 15 or temp < 0:
-                print('\nInvalid digit, must be 1-15. Please try again.\n')
+        for  index,  item in enumerate(start):
+            if item not in acceptable_values:
+                print("\nInvalid digit at position: " + str(index) + "\nValue must be a whole number 1-15. Please try again.\n")
                 start.clear()
                 continue
-            temp_arr.append(temp)
-            if index % 4 == 3:
-                start_table.append(copy.deepcopy(temp_arr))
-                temp_arr.clear()
-        trigger = False
-        break
-    print(start_table)
+            else:
+                trigger = False
+                break
+    # Goal State user input error checknig
     trigger = True
     while trigger:
-        goal = input("\nNow do using the same format, enter digits [0-15], for a  Goal state.\n") 
+        goal = input("\nNow using the same format as before, enter digits [0-15] as a GOAL state for your 15-puzzle problem.\n") 
         goal = goal.split(",")
         if len(goal) < 16:
                 print('\nToo few digits! Please try again.\n')
@@ -90,43 +85,74 @@ def main():
         try: 
             find_repeat(goal)
         except(ValueError):
-            print('\nPlease do not type repeating values. Please try again.\n')
+            print('\nDo not repeat values. Please try again.\n')
             goal.clear()
             continue
-        temp_arr2 = []
-        goal_table =[]
         for index, item in enumerate(goal):
-            temp = int(item)
-            if temp > 15 or temp < 0:
-                print('\nInvalid digit, must be 1-15. Please try again.\n')
+            if item not in acceptable_values:
+                print("\nInvalid digit at position: " + str(index) + "\nValue must be a whole number 1-15. Please try again.\n")
                 goal.clear()
                 continue
-            temp_arr2.append(temp)
-            if index % 4 == 3:
-                goal_table.append(copy.deepcopy(temp_arr2))
-                temp_arr2.clear()
-        trigger = False
-        break
-    print(goal_table)
+            else:
+                trigger = False
+                break
+    
+    # Type of search user input error checking
+    user_selection = 0
+    search_str = ""
     trigger = True
     while trigger:
-        user_selection = input("\n Please enter one of the following numbers to select a type of search:\n 1    - BFS\n 2    - Greedy BFS\n 3    - A*\n")
-        if user_selection != 1 or   user_selection != "2" or   user_selection != "3":
-            print("Invalid entry. Please try again.\n")
-            continue
-        else:
+        user_selection = input("\nPlease enter one of the following numbers to select a type of search:\n    1 - BFS\n    2 - Greedy BFS\n    3 - A*\n")
+        temp = int(user_selection)
+        if temp == 1 or temp == 2 or temp == 3:
+            if temp == 1:
+                search_str = "BFS"
+            elif temp == 2:
+                search_str = "Greedy BFS"
+            else:
+                search_str = "A*"
             trigger = False
             break
+        else:
+            print("Invalid entry. Please try again.\n")
+            continue
+    
+    # once user input error checking is satisfied. prepare data for algorithm
+
+    #start list to matrix w/out numpy
+    temp_arr1 = []
+    start_table =[]
+    for index, item in enumerate(start):
+        temp = int(item)
+        temp_arr1.append(temp)
+        if index % 4 == 3:
+            start_table.append(copy.deepcopy(temp_arr1))
+            temp_arr1.clear()
+    
+    #goal list to matrix w/out numpy
+    temp_arr2 = []
+    goal_table =[]
+    for index, item in enumerate(goal):
+        temp = int(item)
+        temp_arr2.append(temp)
+        if index % 4 == 3:
+            goal_table.append(copy.deepcopy(temp_arr2))
+            temp_arr2.clear()
+
     #pass tables into puzzle solver along with BFS, Greedy BFS, or A* code selection
-    thisPuzzle = PuzzleSolver.PuzzleSolver(start_table, goal_table)
+    thisPuzzle = PuzzleSolver.PuzzleSolver(goal_table, start_table)
     #we must now pass the opcode 0, 1, or 2 into BFS
     # 1 = BFS, 2 = GBFS, 3 = A star
+    print("\n.\n. .\n.  .\n.    .\n.       .\n.           .\n.....thinking........\n.           .\n.       .\n.    .\n.  .\n. .\n.\n")
     hasSolution, solution = thisPuzzle.solvePuzzle(int(user_selection))
+    print("\nThe "+ search_str + " algorithm has completed.\n")
     if hasSolution:
-        print ("there is a solution!:\n")
         thisPuzzle.displayPuzzle(solution)
-    else: print ("no solution found\n")
-    print ("end of BFS test\n")
+    else: print ("There is no solution.\n\n\n   ¯\_ (ツ)_/¯      \n\n\n")
+
+    print("Goodbye.\n")
+    
+     
         
 if __name__=='__main__':
         main()
