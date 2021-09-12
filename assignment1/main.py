@@ -148,7 +148,7 @@ def main():
     print("\nThe "+ search_str + " algorithm has completed.\n")
     if hasSolution:
         thisPuzzle.displayPuzzle(solution)
-    else: print ("There is no solution.\n\n\n   ¯\_ (ツ)_/¯      \n\n\n")
+    else: print ("There is no solution.\n\n\n           ¯\_ (ツ)_/¯      \n\n\n")
 
     print("Goodbye.\n")
     
