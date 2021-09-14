@@ -27,6 +27,10 @@ class PuzzleSolver:
         while not path.empty():
             temp = path.get()
             temp.display()
+        print ("Total Number of Nodes Created: ", self.nodeCount)
+        print ("Number of Nodes Expanded: ",len(self.list.cache) - len(self.list.openlist))
+        print ("Number of levels: ", goal.level)
+
         
     
 
@@ -64,9 +68,10 @@ class PuzzleSolver:
             childrenStates = children.getChildStates()
 
             f = 0 #cost of expanding to a state, set by default to BFS
-
+          
             for child in childrenStates:
                     if not self.list.cache_contains(child.hashValue):
+                        
                         #create a new node object for this child
                         newNode = node.Node(child.table, self.currentNode, self.currentNode.level + 1)
                         self.nodeCount += 1
@@ -77,21 +82,26 @@ class PuzzleSolver:
                         if(code == 1):
                             priority = 1
                             count = self.nodeCount
+                            
 
 
                         #f is only the manhattan value for greedy best-first search
                         if(code == 2):
                             priority = newNode.state.manhattanDistance(self.goal)
                             count = 1
+                            
 
                         #f is the manhattan value and the level for A star
+                        
                         if(code == 3):
+                            
                             priority = newNode.state.manhattanDistance(self.goal) + newNode.level
-                            count = 1
-
-                        #print(f)
+                            count = self.nodeCount
+                            
                         self.list.push_to_openL(newNode, priority, count)
                         self.list.push_to_cache(newNode)
+
+                      
 
 
 
