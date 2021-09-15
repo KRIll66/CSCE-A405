@@ -12,11 +12,15 @@ CSCE A405
 main.py
 
 This acts as user interface module, for a 15-puzzle solver application. 
-It uses a Breadth-First Search module, a greedy best-first search module, and an A* search module to try to solve the 15-puzzle problem. 
+It uses a PuzzleSolver.py to find a solution from  a Start State and a Goal state entered by the user.
+The user has the option to use either Breadth-First Search , a greedy best-first search , or an A* search to solve the puzzle.
 
-User will enter Start state and Goal state. those will be passed to modules for completion. 
+Inputs:
+Start State = digits [0-15], (seperated by commas), in any order as a START state for your 15-puzzle problem. Where 0 represents the balnk space on the puzzle.
+Goal State = digits [0-15], (seperated by commas), in any order as a START state for your 15-puzzle problem. Where 0 represents the balnk space on the puzzle.
 
-Program returns (prints):
+
+Outputs, (prints):
 Total  number of nodes expanded
 The maximum number of nodes 'represented' in the search space
 The length of the Solution path
@@ -45,7 +49,7 @@ def main():
     print("\nWelcome to 15-puzzle solver. Please follow the prompts for input. If you'd like to exit at any time, press (ctrl + c ) on your keyboard.")
     trigger = True
     while trigger:
-        start = input("\nEnter digits [0-15], (seperated by commas), in any order as a START state for your 15-puzzle problem.\nExample: 0,1,2,9,14,5,6,7,8,3,11,12,10,13,4,15\n") 
+        start = input("\nEnter digits [0-15], (seperated by commas), in any order as a START state for your 15-puzzle problem.\nWhere 0 represents the balnk space on the puzzle.\nExample: 0,1,2,9,14,5,6,7,8,3,11,12,10,13,4,15\n\n") 
         start = start.split(",")
         if len(start) < 16:
                 print('\nToo few digits! Please try again.\n')
@@ -102,15 +106,15 @@ def main():
     search_str = ""
     trigger = True
     while trigger:
-        user_selection = input("\nPlease enter one of the following numbers to select a type of search:\n    1 - BFS\n    2 - Greedy BFS\n    3 - A*\n")
+        user_selection = input("\nPlease enter one of the following numbers to select a type of search:\n    1 - Breadth-First Search \n    2 - Greedy Best-First Search using the Manhattan Distance heuristic\n    3 - A* Search using the Manhattan Distance heuristic\n")
         temp = int(user_selection)
         if temp == 1 or temp == 2 or temp == 3:
             if temp == 1:
-                search_str = "BFS"
+                search_str = "Breadth-First Search"
             elif temp == 2:
-                search_str = "Greedy BFS"
+                search_str = "Greedy Best-First Search"
             else:
-                search_str = "A*"
+                search_str = "A* search"
             trigger = False
             break
         else:
