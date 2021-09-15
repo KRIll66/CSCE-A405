@@ -1,3 +1,23 @@
+#################################################################################
+#Class: Puzzle Solver
+#
+#Purpose:
+#performs the search algorithm and displays the results of the puzzle search
+#
+#Inputs:
+#Takes the start and goal states from main()
+#
+#Outputs:
+#Displays the results of the search, including the path to the solution,
+#the level of the solution, the total nodes expanded, and the total nodes
+#generated
+#
+#@authors:
+#Lydia Stark, Marshall Pratt
+################################################################################
+
+
+
 import node, state, childstates, nodelists, queue
 
 
@@ -13,7 +33,7 @@ class PuzzleSolver:
 
 
     #populates a lifo queue with the path from goal to start
-    #displays it all in appropriate order
+    #displays it all in appropriate order, from start state to goal
     def displayPuzzle (self, goal):
         print ("Number of Nodes created: ", self.nodeCount)
         print ("Number of levels: ", goal.level)

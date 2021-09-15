@@ -19,7 +19,7 @@ VARIABLES:
 table: 2D list with the current values for this Node
 hashVal: unique hashvalue for this state table
 
-@author: Marshall Pratt
+@authors: Marshall Pratt, Lydia Stark
 """
 import hashlib
 

@@ -26,6 +26,8 @@ startingstate = holds a State object
 blankrow = holds the row coordinate of the blank space in startingstate's grid
 blankcol = holds the column coordinate of the blank space in startingstate's grid
 
+Author:
+Lydia Stark
 """
 import state
 import copy
