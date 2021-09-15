@@ -56,7 +56,7 @@ class PuzzleSolver:
             if len(self.list.openlist) == 0:
                 return False, None
 
-            #pop top node from queue and add to closedList
+            #pop top node from queue and add to closedList and cache
             self.currentNode = self.list.pop_openL()
             #self.currentNode=  self.currentNode[1]
             self.list.push_to_closedL(self.currentNode)
