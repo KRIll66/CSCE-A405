@@ -19,15 +19,10 @@ def main():
     
     
     table1 = [[0,2,3,4], [1,6,7,8], [5,10,11,12], [9,13,14,15]]
-  
     table3 = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,0]]
-
-
-
     
     #BFS class test
     print ("start of test")
-
 
     thisPuzzle = PuzzleSolver.PuzzleSolver(table1, table3)
     #we must now pass the opcode 0, 1, or 2 into BFS
@@ -37,7 +32,6 @@ def main():
         print ("there is a solution!:")
         thisPuzzle.displayPuzzle(solution)
     else: print ("no solution found")
-    
 
 
     

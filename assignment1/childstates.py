@@ -1,5 +1,5 @@
 """
-ChildStates class is a class that generates all the possible expanded
+The ChildStates class is a class that generates all the possible expanded
 states from a starting state and returns them in a tuple.
 
 INPUTS:
@@ -13,7 +13,7 @@ down state, left state
 
 FUNCTIONS:
 getChildStates: returns all possible state expansions of the startingstate
- as State objects in the following order: up state, right state,
+as State objects in the following order: up state, right state,
 down state, left state
 moveUp: moves the blank space up
 moveRight: moves the blank space right
@@ -23,24 +23,19 @@ moveLeft: moves the blank space left
 
 VARIABLES:
 startingstate = holds a State object
-blankrow = holds the row coordinate of the blank space in startingstate's grid
-blankcol = holds the column coordinate of the blank space in startingstate's grid
 
 Author:
-Lydia Stark
+@Lydia Stark
 """
 import state
 import copy
 class ChildStates:
 
-    #constructor is initialized with a state object, the coordinates of
-    #the blank space, and the max size of the grid (note that we could have
-    #just used the number 3 instead, but using a variable for the size of
-    # the grid allows for future change.
+    #constructor is initialized with a state object
     def __init__(self, state):
         self.startingstate = copy.deepcopy(state)
 
-
+    #moves the blank space up (if permissable)
     def moveUp(self):
         copyOfState = copy.deepcopy(self.startingstate)
         tuple = copyOfState.getIndex(0)
@@ -50,6 +45,7 @@ class ChildStates:
             copyOfState.swap(blankrow, blankcol, blankrow - 1, blankcol)
             return copyOfState
 
+    # moves the blank space right (if permissable)
     def moveRight(self):
         copyOfState = copy.deepcopy(self.startingstate)
         tuple = copyOfState.getIndex(0)
@@ -59,6 +55,7 @@ class ChildStates:
             copyOfState.swap(blankrow, blankcol, blankrow, blankcol + 1)
             return copyOfState
 
+    # moves the blank space down (if permissable)
     def moveDown(self):
         copyOfState = copy.deepcopy(self.startingstate)
         tuple = copyOfState.getIndex(0)
@@ -68,6 +65,7 @@ class ChildStates:
             copyOfState.swap(blankrow, blankcol, blankrow + 1, blankcol)
             return copyOfState
 
+    # moves the blank space left (if permissable)
     def moveLeft(self):
         copyOfState = copy.deepcopy(self.startingstate)
         tuple = copyOfState.getIndex(0)
@@ -77,8 +75,8 @@ class ChildStates:
             copyOfState.swap(blankrow, blankcol, blankrow, blankcol - 1)
             return copyOfState
 
-    #This method returns the possible expanded states of startingstate as
-    # a tuple of State objects
+    #This method returns the possible expanded states (i.e. blank space moved up,
+    # down, left, right) of a state as a tuple of State objects
     def getChildStates(self):
         tuple = self.startingstate.getIndex(0)
         row = tuple[0]

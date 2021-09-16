@@ -16,8 +16,8 @@ It uses a PuzzleSolver.py to find a solution from  a Start State and a Goal stat
 The user has the option to use either Breadth-First Search , a greedy best-first search , or an A* search to solve the puzzle.
 
 Inputs:
-Start State = digits [0-15], (seperated by commas), in any order as a START state for your 15-puzzle problem. Where 0 represents the balnk space on the puzzle.
-Goal State = digits [0-15], (seperated by commas), in any order as a START state for your 15-puzzle problem. Where 0 represents the balnk space on the puzzle.
+Start State = digits [0-15], (seperated by commas), in any order as a START state for your 15-puzzle problem. Where 0 represents the blank space on the puzzle.
+Goal State = digits [0-15], (seperated by commas), in any order as a START state for your 15-puzzle problem. Where 0 represents the blank space on the puzzle.
 
 
 Outputs, (prints):

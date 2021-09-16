@@ -80,7 +80,6 @@ class State:
         for i in goal:
             if goal.index(i)!=current.index(i):
                 mhd = mhd + (abs(goal.index(i)//4 - current.index(i)//4) + abs(goal.index(i)%4 - current.index(i)%4))
-                    
 
         return mhd
     
